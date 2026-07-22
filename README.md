@@ -95,3 +95,21 @@
 | `Alt+X`                             | مخفی یا نمایان کردن خطوط راهنما                |
 | `Alt+Z`                             | مخفی یا نمایان کردن نوارهای اطلاعات            |
 
+
+## 🧩 3) file proccessing
+
+| دستور (Command) | توضیح فارسی | example |
+| :--- | :--- | :--- |
+| `split -l 10 filename prefixname` | فایل را به چند فایل کوچک‌تر تقسیم می‌کند؛ هر فایل خروجی شامل ۱۰ خط خواهد بود. نام فایل‌های خروجی با `prefixname` شروع می‌شود. | `split -l 10 users.txt part_` → `part_aa`, `part_ab` |
+| `split -l 10 filename prefixname -d` | فایل را به بخش‌های ۱۰ خطی تقسیم می‌کند و برای نام فایل‌های خروجی به‌جای حروف از اعداد استفاده می‌کند. | `split -l 10 users.txt part_ -d` → `part_00`, `part_01` |
+| `sort filename` | خطوط داخل فایل را به‌صورت الفبایی مرتب می‌کند. | `sort names.txt` |
+| `sort -n filename` | خطوط فایل را بر اساس مقدار عددی، از کوچک به بزرگ مرتب می‌کند. | `sort -n numbers.txt` |
+| `sort -nr filename` | خطوط فایل را بر اساس مقدار عددی، از بزرگ به کوچک مرتب می‌کند. | `sort -nr numbers.txt` |
+| `less filename` | محتوای فایل را به‌صورت صفحه‌به‌صفحه نمایش می‌دهد و امکان جستجو و جابه‌جایی داخل فایل را فراهم می‌کند. | `less access.log` |
+| `head -n 10 filename` | ۱۰ خط اول فایل را نمایش می‌دهد. | `head -n 10 users.txt` |
+| `tail -n 10 filename` | ۱۰ خط آخر فایل را نمایش می‌دهد. | `tail -n 10 access.log` |
+| `tail -f filename` | تغییرات جدید فایل را به‌صورت زنده نمایش می‌دهد؛ معمولاً برای بررسی فایل‌های لاگ استفاده می‌شود. | `tail -f /var/log/nginx/access.log` |
+| `wc -l filename` | تعداد خطوط موجود در فایل را نمایش می‌دهد. | `wc -l users.txt` → `120 users.txt` |
+| `uniq filename` | خطوط تکراری پشت‌سرهم را حذف می‌کند. بهتر است قبل از آن از `sort` استفاده شود. | `sort names.txt \| uniq` |
+| `md5sum filename` | هش MD5 فایل را محاسبه می‌کند؛ معمولاً برای بررسی تغییر نکردن یا سالم بودن فایل استفاده می‌شود. | `md5sum backup.zip` |
+| `sha256sum filename` | هش SHA-256 فایل را محاسبه می‌کند و نسبت به MD5 امنیت و دقت بیشتری دارد. | `sha256sum backup.zip` |
