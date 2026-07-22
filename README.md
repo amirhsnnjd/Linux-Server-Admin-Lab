@@ -113,3 +113,26 @@
 | `uniq filename` | خطوط تکراری پشت‌سرهم را حذف می‌کند. بهتر است قبل از آن از `sort` استفاده شود. | `sort names.txt \| uniq` |
 | `md5sum filename` | هش MD5 فایل را محاسبه می‌کند؛ معمولاً برای بررسی تغییر نکردن یا سالم بودن فایل استفاده می‌شود. | `md5sum backup.zip` |
 | `sha256sum filename` | هش SHA-256 فایل را محاسبه می‌کند و نسبت به MD5 امنیت و دقت بیشتری دارد. | `sha256sum backup.zip` |
+
+
+
+## 🧩 4) grep & regular expression
+
+| دستور (Command) | توضیح فارسی | example |
+| :--- | :--- | :--- |
+| `grep "hi" filename` | خط‌هایی از فایل را نمایش می‌دهد که عبارت `hi` داخل آن‌ها وجود دارد. | `grep "error" log.txt` |
+| `grep -v "hi" filename` | خط‌هایی را نمایش می‌دهد که عبارت `hi` داخل آن‌ها وجود ندارد. | `grep -v "success" log.txt` |
+| `egrep "^hi" filename` | خط‌هایی را نمایش می‌دهد که با عبارت `hi` شروع می‌شوند. علامت `^` به معنی ابتدای خط است. | `egrep "^root" users.txt` |
+| `grep -i "hi" filename` | عبارت را بدون حساسیت به حروف بزرگ و کوچک جستجو می‌کند. | `grep -i "linux" file.txt` |
+| `grep -c "hi" filename` | تعداد خط‌هایی را نمایش می‌دهد که عبارت `hi` داخل آن‌ها وجود دارد. | `grep -c "error" log.txt` |
+| `egrep -R "^hi" *` | داخل تمام فایل‌ها و پوشه‌های مسیر فعلی به‌صورت بازگشتی، خط‌هایی را پیدا می‌کند که با `hi` شروع می‌شوند. | `egrep -R "^Error" *` |
+| `egrep -d skip "^hi" *` | عبارت را داخل فایل‌های مسیر فعلی جستجو می‌کند، اما پوشه‌ها را نادیده می‌گیرد. | `egrep -d skip "^root" *` |
+| `echo hi > test` | عبارت `hi` را داخل فایل `test` می‌نویسد. اگر فایل محتوا داشته باشد، محتوای قبلی پاک می‌شود. | `echo "Hello" > test.txt` |
+| `echo hi >> test` | عبارت `hi` را به انتهای فایل `test` اضافه می‌کند، بدون اینکه محتوای قبلی پاک شود. | `echo "New line" >> test.txt` |
+| `ls ali 2> test` | خطاهای دستور را داخل فایل `test` ذخیره می‌کند. عدد `2` نشان‌دهنده خروجی خطا یا `stderr` است. | `ls notfound 2> errors.txt` |
+| `ls ali &> test` | هم خروجی عادی و هم خطاهای دستور را داخل فایل `test` ذخیره می‌کند. | `ls /root &> output.txt` |
+| `cat < file1 > file2` | محتوای `file1` را به‌عنوان ورودی دریافت کرده و داخل `file2` می‌نویسد. محتوای قبلی `file2` پاک می‌شود. | `cat < source.txt > destination.txt` |
+| `> filename` | محتوای فایل را به‌طور کامل پاک می‌کند، ولی خود فایل باقی می‌ماند. اگر فایل وجود نداشته باشد، آن را ایجاد می‌کند. | `> access.log` |
+| `echo "Linux behtarin ose, Linux linux linx" \| sed 's/Linux/BSD/'` | فقط اولین عبارت `Linux` در هر خط را با `BSD` جایگزین می‌کند. | خروجی: `BSD behtarin ose, Linux linux linx` |
+| `echo "Linux behtarin ose, Linux linux linx" \| sed 's/Linux/BSD/g'` | تمام عبارت‌های دقیق `Linux` را در خط با `BSD` جایگزین می‌کند. به حروف بزرگ و کوچک حساس است. | خروجی: `BSD behtarin ose, BSD linux linx` |
+| `echo "Linux behtarin ose, Linux linux linx" \| sed 's/Linux/BSD/gi'` | تمام حالت‌های عبارت `Linux` را بدون حساسیت به حروف بزرگ و کوچک با `BSD` جایگزین می‌کند. | خروجی: `BSD behtarin ose, BSD BSD linx` |
